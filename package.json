@@ -1,0 +1,29 @@
+{
+  "name": "dashboard-financeiro",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev:react": "vite --open /react.html",
+    "dev:react-main": "vite --open /app.html",
+    "build:react": "vite build",
+    "preview:react": "vite preview --outDir dist-react"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.15.0",
+    "recharts": "^3.8.1",
+    "vite": "^7.1.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
+  }
+}

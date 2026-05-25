@@ -1,0 +1,92 @@
+/* Fonte principal — Plus Jakarta Sans (com fallback para Inter / system-ui). */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* Fontes display legadas mantidas para componentes que ainda referenciem font-display. */
+@font-face {
+  font-family: 'Bebas Neue Pro';
+  src: url('../../fonts/Bebas-Neue-Pro-Book-BF66cf3d779e1f9.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Pro';
+  src: url('../../fonts/Bebas-Neue-Pro-Regular-BF66cf3d7814160.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Neue Pro';
+  src: url('../../fonts/Bebas-Neue-Pro-Middle-BF66cf3d796ef6b.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode — paleta MeuControle (referencia das imagens da UI).
+       Fundo off-white frio, accent verde #1F8A5B, cores semanticas calibradas. */
+    --finance-bg: 246 248 250;          /* fundo geral (#F6F8FA) */
+    --finance-surface: 255 255 255;     /* superficie de cards */
+    --finance-text: 17 24 39;           /* texto principal (#111827) */
+    --finance-muted: 100 116 139;       /* texto secundario (slate-500) */
+    --finance-border: 226 232 240;      /* bordas suaves (slate-200) */
+    --finance-blue: 37 99 235;          /* #2563EB */
+    --finance-green: 34 160 107;        /* #22A06B */
+    --finance-red: 214 69 69;           /* #D64545 */
+    --finance-yellow: 245 158 11;       /* #F59E0B */
+    --finance-accent: 31 138 91;        /* #1F8A5B - verde principal */
+    --finance-accent-bg: 209 250 229;   /* fundo do accent (verde claro) */
+    color-scheme: light;
+  }
+
+  .dark {
+    /* Dark mode — paleta Modo Escuro das imagens de referencia.
+       Fundos teal profundos, texto claro, accent verde consistente. */
+    --finance-bg: 7 26 34;              /* #071A22 - fundo mais profundo */
+    --finance-surface: 18 53 68;        /* #123544 - superficie de cards */
+    --finance-text: 248 250 252;        /* #F8FAFC - texto principal */
+    --finance-muted: 148 163 184;       /* texto secundario (slate-400) */
+    --finance-border: 36 70 83;         /* #244653 - bordas */
+    --finance-blue: 37 99 235;          /* #2563EB */
+    --finance-green: 34 160 107;        /* #22A06B */
+    --finance-red: 214 69 69;           /* #D64545 */
+    --finance-yellow: 245 158 11;       /* #F59E0B */
+    --finance-accent: 31 138 91;        /* #1F8A5B - verde principal */
+    --finance-accent-bg: 14 42 53;      /* #0E2A35 - fundo sutil do accent */
+    color-scheme: dark;
+  }
+
+  html {
+    font-family: 'Plus Jakarta Sans', Inter, system-ui, 'Segoe UI', Roboto,
+      'Helvetica Neue', Arial, sans-serif;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: rgb(var(--finance-bg));
+    color: rgb(var(--finance-text));
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  #react-root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}

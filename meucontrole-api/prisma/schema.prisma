@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Usuários ─────────────────────────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  userData      UserData?
+  refreshTokens RefreshToken[]
+  passwordResets PasswordReset[]
+
+  @@map("users")
+}
+
+// ─── Dados financeiros do usuário (JSONB — espelha os STORAGE_KEYS) ──────────
+
+model UserData {
+  id        String   @id @default(cuid())
+  userId    String   @unique @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Espelha STORAGE_KEYS.appState — contém fluxo, dividas, emprestimos
+  appState      Json?    @map("app_state")
+
+  // Espelha os demais STORAGE_KEYS
+  goals         Json?
+  categories    Json?
+  recurrences   Json?
+  budgets       Json?
+  welcomed      String?
+
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("user_data")
+}
+
+// ─── Refresh Tokens ────────────────────────────────────────────────────────────
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// ─── Reset de Senha ────────────────────────────────────────────────────────────
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@map("password_resets")
+}
+
+// ─── Enums ─────────────────────────────────────────────────────────────────────
+
+enum Plan {
+  FREE
+  PRO
+}
